@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Rai and Oriol
+  description: Install and configure zerotier
+  company: Industry 4.0 Systems
+
+  license: MIT
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags: [ 'zerotier', 'network', 'networking']
+
+dependencies: []

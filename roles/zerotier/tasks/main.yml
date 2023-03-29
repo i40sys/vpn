@@ -1,0 +1,19 @@
+- name: Install zerotier
+  include_tasks: install.yml
+  tags: install
+
+- name: Join ZeroTier
+  include_tasks: join.yml
+  tags: join
+
+- name: Firewall configuration
+  include_tasks: firewall.yml
+  tags: firewall
+
+- name: udev configuration
+  include_tasks: udev.yml
+  tags: udev
+
+- name: Bridge configuration
+  include_tasks: bridge.yml
+  tags: bridge

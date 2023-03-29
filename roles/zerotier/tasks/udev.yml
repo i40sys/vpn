@@ -1,0 +1,14 @@
+- name: Create a new rule for applying Netplan configuration everytime a new ZeroTier interface is created
+  ansible.builtin.copy:
+    dest: /etc/udev/rules.d/99-netplan-apply.rules
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      ACTION=="add", SUBSYSTEM=="net", KERNEL=="{{ zerotier_interface }}", RUN+="/usr/sbin/netplan apply"
+
+- name: Restart systemd-udevd.service
+  ansible.builtin.systemd:
+    name: systemd-udevd.service
+    state: restarted
+    daemon_reload: true

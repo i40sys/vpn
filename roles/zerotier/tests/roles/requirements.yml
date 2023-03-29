@@ -1,0 +1,9 @@
+---
+# - name: i40sys.zerotier_bridge_ansible_role
+- name: i40sys.zerotier_bridge_ansible_role
+  src: https://github.com/i40sys/zerotier-bridge-ansible-role.git
+  version: main
+# - name: i40sys.zerotier_bridge_ansible_role
+#   src: git+ssh://git@git.oriolrius.cat:222/oriolrius/zerotier-bridge-ansible-role.git
+#   scm: git
+#   version: v.1.0.3

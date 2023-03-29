@@ -1,0 +1,6 @@
+---
+# vars file for zerotier
+# zerotier_network_id: 0000000000000000
+# lan_interface: eth0
+# wan_interface: eth1
+# zerotier_ip_address: "172.26.115.180/20"

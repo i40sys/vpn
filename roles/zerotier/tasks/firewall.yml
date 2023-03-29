@@ -1,0 +1,41 @@
+- name: Allow forwarding for VPN interface
+  ansible.posix.iptables:
+    chain: FORWARD
+    in_interface: "{{ zerotier_interface }}"
+    jump: ACCEPT
+    comment: "Allow forwarding for VPN interface"
+
+- name: Allow forwarding for bridge interface
+  ansible.posix.iptables:
+    chain: FORWARD
+    in_interface: br0
+    jump: ACCEPT
+    comment: "Allow forwarding for bridge interface"
+
+- name: Allow forwarding for local interface
+  ansible.posix.iptables:
+    chain: FORWARD
+    in_interface: "{{ lan_interface }}"
+    jump: ACCEPT
+    comment: "Allow forwarding for local interface"
+
+- name: Allow outgoing traffic for VPN interface
+  ansible.posix.iptables:
+    chain: FORWARD
+    out_interface: "{{ zerotier_interface }}"
+    jump: ACCEPT
+    comment: "Allow outgoing traffic for VPN interface"
+
+- name: Allow outgoing traffic for bridge interface
+  ansible.posix.iptables:
+    chain: FORWARD
+    out_interface: br0
+    jump: ACCEPT
+    comment: "Allow outgoing traffic for bridge interface"
+
+- name: Allow outgoing traffic for local interface
+  ansible.posix.iptables:
+    chain: FORWARD
+    out_interface: "{{ lan_interface }}"
+    jump: ACCEPT
+    comment: "Allow outgoing traffic for local interface"
