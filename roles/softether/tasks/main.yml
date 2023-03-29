@@ -26,7 +26,7 @@
 
 - name: Deploying docker-compose for softether-vpnclient
   ansible.builtin.copy:
-    src: ../docker-compose.yml
+    src: docker-compose.yml
     dest: "{{ softether_vpnclient_path }}/docker-compose.yml"
     owner: root
     group: root
