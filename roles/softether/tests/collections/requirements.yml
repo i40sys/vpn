@@ -1,6 +1,6 @@
 ---
 collections:
-  # - name: i40sys.zerotier_bridge_ansible_role
+  # - name: i40sys.vpn.vpn_ansible_collection
   # - name: i40sys.vpn_ansible_collection
   #   src: https://github.com/i40sys/vpn_ansible_collection.git
   #   version: main

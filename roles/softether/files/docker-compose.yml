@@ -12,3 +12,4 @@ services:
       - ./config/vpn_client.config:/usr/local/libexec/softether/vpnclient/vpn_client.config
       - ./config/lang.config:/usr/local/libexec/softether/vpnclient/lang.config
       - ./log:/usr/local/libexec/softether/vpnclient/client_log
+    build: .
