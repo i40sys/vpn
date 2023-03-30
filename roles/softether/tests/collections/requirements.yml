@@ -1,9 +1,12 @@
 ---
 collections:
-  # - name: i40sys.vpn.vpn_ansible_collection
-  # - name: i40sys.vpn_ansible_collection
-  #   src: https://github.com/i40sys/vpn_ansible_collection.git
-  #   version: main
-  - name: git+ssh://git@git.oriolrius.cat:222/oriolrius/vpn_ansible_collection.git
-    scm: git
+  # ansible-galaxy:
+  # - name: i40sys.vpn
+  # public github repo:
+  - name: https://github.com/i40sys/vpn.git
+    type: git
     version: main
+  # private repos:
+  # - name: git+ssh://git@git.oriolrius.cat:222/oriolrius/vpn_ansible_collection.git
+  #   scm: git
+  #   version: main
