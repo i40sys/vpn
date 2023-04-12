@@ -4,7 +4,7 @@
     path: "{{ softether_vpnserver_path }}/config"
     state: directory
     mode: 0755
-  tags: install
+  tags: install, server
 
 - name: Touch lang.config
   ansible.builtin.copy:
