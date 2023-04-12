@@ -4,7 +4,7 @@
     path: "{{ softether_vpnserver_path }}/config"
     state: directory
     mode: 0755
-  #tags: install, server
+  tags: install, server
 
 - name: Touch lang.config
   ansible.builtin.copy:
@@ -13,7 +13,7 @@
     group: root
     owner: root
     mode: 0644
-  tags: install
+  tags: install, server
 
 - name: Touch vpn_server.config
   ansible.builtin.copy:
@@ -22,7 +22,7 @@
     group: root
     owner: root
     mode: 0644
-  tags: install
+  tags: install, server
 
 - name: Deploying docker-compose for softether-vpnserver
   ansible.builtin.template:
@@ -31,7 +31,7 @@
     owner: root
     group: root
     mode: 0644
-  tags: install
+  tags: install, server
 
 - name: Launch docker-compose softether-vpnserver service
   community.docker.docker_compose:
@@ -39,7 +39,7 @@
     state: present
     build: false
     pull: true
-  tags: install
+  tags: install, server
 
 - name: Adding alias for vpncmd
   ansible.builtin.lineinfile:
@@ -50,11 +50,11 @@
     state: present
     insertafter: EOF
     create: True
-  tags: config
+  tags: config, server
 
 - name: Enabling remote access
   ansible.builtin.shell: |
     docker exec -it softether-vpnserver \
       /usr/local/libexec/softether/vpncmd/vpncmd \
         localhost /server /cmd RemoteEnable
-  tags: config
+  tags: config, server

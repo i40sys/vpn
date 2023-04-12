@@ -4,7 +4,7 @@
     path: "{{ softether_vpnclient_path }}/config"
     state: directory
     mode: 0755
-  tags: install
+  tags: install, client
 
 - name: Touch lang.config
   ansible.builtin.copy:
@@ -13,7 +13,7 @@
     group: root
     owner: root
     mode: 0644
-  tags: install
+  tags: install, client
 
 - name: Touch vpn_client.config
   ansible.builtin.copy:
@@ -22,7 +22,7 @@
     group: root
     owner: root
     mode: 0644
-  tags: install
+  tags: install, client
 
 - name: Deploying docker-compose for softether-vpnclient
   ansible.builtin.template:
@@ -31,7 +31,7 @@
     owner: root
     group: root
     mode: 0644
-  tags: install
+  tags: install, client
 
 - name: Launch docker-compose softether-vpnclient service
   community.docker.docker_compose:
@@ -39,7 +39,7 @@
     state: present
     build: false
     pull: true
-  tags: install
+  tags: install, client
 
 - name: Adding alias for vpncmd
   ansible.builtin.lineinfile:
@@ -50,14 +50,14 @@
     state: present
     insertafter: EOF
     create: True
-  tags: config
+  tags: config, client
 
 - name: Enabling remote access
   ansible.builtin.shell: |
     docker exec -it softether-vpnclient \
       /usr/local/libexec/softether/vpncmd/vpncmd \
         localhost /client /cmd RemoteEnable
-  tags: config
+  tags: config, client
 
 - name: Enabling VPN NIC events (TUNDownOnDisconnectEnable)
   ansible.builtin.shell: |
@@ -65,4 +65,4 @@
       /usr/local/libexec/softether/vpncmd/vpncmd \
         localhost /client /cmd TUNDownOnDisconnectEnable
   when: softether_version == "5.01.9674"
-  tags: config
+  tags: config, client
