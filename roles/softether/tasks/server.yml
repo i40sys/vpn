@@ -51,10 +51,3 @@
     insertafter: EOF
     create: True
   tags: config, server
-
-- name: Enabling remote access
-  ansible.builtin.shell: |
-    docker exec -it softether-vpnserver \
-      /usr/local/libexec/softether/vpncmd/vpncmd \
-        localhost /server /cmd RemoteEnable
-  tags: config, server
