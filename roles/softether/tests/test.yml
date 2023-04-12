@@ -7,3 +7,8 @@
     - role: i40sys.vpn.softether
       vars:
         softether_vpnclient_path: "/docker-data/softether-vpnclient"
+        softether_vpnserver_path: "/docker-data/softether-vpnserver"
+        # stable branch:
+        softether_version: "v4.39-9772-beta"
+        # development branch:
+        # softether_version: "v5.01.9674"

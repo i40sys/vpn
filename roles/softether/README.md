@@ -27,6 +27,13 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
          - { role: username.rolename, x: 42 }
 
+Run the playbook with:
+
+```bash
+cd tests
+ansible-playbook -i inventory.yml test.yml --tags "server"
+```	
+
 License
 -------
 

@@ -1,3 +1,4 @@
 ---
 # defaults file for softether
 softether_vpnclient_path: "/docker-data/softether-vpnclient"
+softether_vpnserver_path: "/docker-data/softether-vpnserver"

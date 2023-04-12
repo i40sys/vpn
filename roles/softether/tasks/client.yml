@@ -1,0 +1,68 @@
+---
+- name: Create directory path
+  ansible.builtin.file:
+    path: "{{ softether_vpnclient_path }}/config"
+    state: directory
+    mode: 0755
+  tags: install
+
+- name: Touch lang.config
+  ansible.builtin.copy:
+    content: ""
+    dest: "{{ softether_vpnclient_path }}/config/lang.config"
+    group: root
+    owner: root
+    mode: 0644
+  tags: install
+
+- name: Touch vpn_client.config
+  ansible.builtin.copy:
+    content: ""
+    dest: "{{ softether_vpnclient_path }}/config/vpn_client.config"
+    group: root
+    owner: root
+    mode: 0644
+  tags: install
+
+- name: Deploying docker-compose for softether-vpnclient
+  ansible.builtin.template:
+    src: docker-compose.yml.client
+    dest: "{{ softether_vpnclient_path }}/docker-compose.yml"
+    owner: root
+    group: root
+    mode: 0644
+  tags: install
+
+- name: Launch docker-compose softether-vpnclient service
+  community.docker.docker_compose:
+    project_src: "{{ softether_vpnclient_path }}"
+    state: present
+    build: false
+    pull: true
+  tags: install
+
+- name: Adding alias for vpncmd
+  ansible.builtin.lineinfile:
+    path: /root/.bashrc
+    line: "alias vpncmd='docker exec -it softether-vpnclient /usr/local/libexec/softether/vpncmd/vpncmd'"
+    owner: root
+    regexp: "^alias vpncmd='docker exec -it softether-vpnclient /usr/local/libexec/softether/vpncmd/vpncmd'$"
+    state: present
+    insertafter: EOF
+    create: True
+  tags: config
+
+- name: Enabling remote access
+  ansible.builtin.shell: |
+    docker exec -it softether-vpnclient \
+      /usr/local/libexec/softether/vpncmd/vpncmd \
+        localhost /client /cmd RemoteEnable
+  tags: config
+
+- name: Enabling VPN NIC events (TUNDownOnDisconnectEnable)
+  ansible.builtin.shell: |
+    docker exec -it softether-vpnclient \
+      /usr/local/libexec/softether/vpncmd/vpncmd \
+        localhost /client /cmd TUNDownOnDisconnectEnable
+  when: softether_version == "5.01.9674"
+  tags: config

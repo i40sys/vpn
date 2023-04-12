@@ -1,0 +1,14 @@
+version: '2'
+services:
+  softether-vpnserver:
+    image: oriolrius/softether-vpnserver:{{ softether_version }}
+    container_name: softether-vpnserver
+    privileged: true
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./config/vpn_server.config:/usr/local/libexec/softether/vpnserver/vpn_server.config
+      - ./config/lang.config:/usr/local/libexec/softether/vpnserver/lang.config
+      - ./log:/usr/local/libexec/softether/vpnserver/server_log

@@ -1,3 +1,5 @@
 ---
-# vars file for softether
-#softether_vpnclient_path: "/docker-data/softether-vpnclient"
+# latest stable:
+softether_version: "v4.39-9772-beta"
+# development branch:
+#softether_version: "5.01.9674"
